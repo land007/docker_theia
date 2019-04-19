@@ -15,6 +15,7 @@ EXPOSE 5050
 ENTRYPOINT []
 #CMD node /home/theia/src-gen/backend/main.js /home/project --hostname=0.0.0.0
 #CMD node /home/theia/agent/proxy.js
-CMD nohup node /home/theia/agent/proxy.js > /tmp/proxy.out & nohup node /home/theia/src-gen/backend/main.js /home/project --hostname=0.0.0.0 --inspect=0.0.0.0:9229 > /tmp/theia.out & bash
+CMD nohup node /home/theia/agent/proxy.js > /tmp/proxy.out & nohup node /home/theia/src-gen/backend/main.js /home/project --hostname=0.0.0.0 --startup-timeout=-1 --inspect=0.0.0.0:9229 > /tmp/theia.out & bash
 
-#docker rm -f theia; docker run -it --privileged -p 15050:5050 -p 13005:3000 --expose 9229 -p 19229:9229 -v "$(pwd):/home/project:cached" -e "username=land007" -e "password=fcea920f7412b5da7be0cf42b8c93759" --name theia land007/theia:latest
+#docker rm -f theia; docker run -it --privileged -p 15050:5050 --expose 9229 -p 19229:9229 -v "$(pwd):/home/project:cached" -e "username=land007" -e "password=fcea920f7412b5da7be0cf42b8c93759" --name theia land007/theia:latest
+#docker rm -f theia; docker run -it --privileged --expose 80 -p 80:80 --expose 3000 -p 3000:3000 -p 15050:5050 --expose 9229 -p 19229:9229 -v "$(pwd):/home/project:cached" -e "username=land007" -e "password=fcea920f7412b5da7be0cf42b8c93759" --name theia land007/theia:latest
