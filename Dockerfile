@@ -7,6 +7,11 @@ RUN mkdir /home/theia/agent
 RUN cd /home/theia/agent && npm init -y && npm install http-proxy basic-auth
 ADD proxy.js /home/theia/agent
 
+USER root
+RUN apk add --no-cache subversion screen
+RUN npm install -g supervisor 
+USER theia
+
 ENV username=land007
 ENV password=fcea920f7412b5da7be0cf42b8c93759
 
